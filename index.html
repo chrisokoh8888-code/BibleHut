@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BibleHut Games</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="container">
+    <h1>Welcome to BibleHut Games</h1>
+    <p>Select a game below and test your Bible knowledge!</p>
+
+    <!-- GAME SELECTOR DROPDOWN -->
+    <select id="game-selector">
+      <option value="fill">Fill-in-the-Blank</option>
+      <option value="guess">Guess the Character</option>
+      <option value="trivia">Trivia</option>
+      <option value="scramble">Word Scramble</option>
+      <option value="verse-match">Verse Match</option>
+    </select>
+
+    <!-- START BUTTON -->
+    <button id="start-game">Start Game</button>
+  </div>
+
+  <!-- Script for Start Button -->
+  <script>
+    document.getElementById("start-game").addEventListener("click", () => {
+      const gameType = document.getElementById("game-selector").value;
+      window.location.href = `game.html?type=${gameType}`;
+    });
+  </script>
+
+</body>
+</html>
