@@ -9,6 +9,7 @@
 <body>
   <div class="container">
     <h1>BibleHut Game</h1>
+    <h2 id="game-title"></h2>
     <div id="game-container"></div>
     <div id="score-container" class="hidden">
       <h2>🎉 Your Score: <span id="score">0</span></h2>
@@ -18,13 +19,7 @@
       <h2>🏆 Leaderboard</h2>
       <ul id="leaderboard-list"></ul>
     </div>
-    <select id="game-selector">
-      <option value="fill">Fill-in-the-Blank</option>
-      <option value="guess">Guess the Character</option>
-      <option value="trivia">Trivia / Multiple Choice</option>
-      <option value="scramble">Word Scramble</option>
-      <option value="verse-match">Verse Match</option>
-    </select>
+    
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
