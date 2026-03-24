@@ -437,3 +437,27 @@ document.addEventListener("DOMContentLoaded", () => {
   gameContainer.classList.remove("hidden");
   showQuestion();
 });
+document.addEventListener("DOMContentLoaded", () => {
+  startGame();
+
+  // =========================
+  // HOME BUTTON
+  const backBtn = document.getElementById("back-home");
+  if (backBtn) {
+    backBtn.addEventListener("click", () => {
+      window.location.href = "index.html";
+    });
+  }
+
+  // =========================
+  // GAME SWITCHER
+  const switchBtn = document.getElementById("switch-game");
+  const switchSelect = document.getElementById("game-switcher");
+
+  if (switchBtn && switchSelect) {
+    switchBtn.addEventListener("click", () => {
+      const newGame = switchSelect.value;
+      window.location.href = `game.html?type=${newGame}&v=${Date.now()}`;
+    });
+  }
+});
