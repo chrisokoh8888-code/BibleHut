@@ -305,7 +305,20 @@ const questions = {
     { question: "Match: Hebrews 11:1", answer: "Faith is the assurance of things hoped for" },
     { question: "Match: Matthew 5:9", answer: "Blessed are the peacemakers" },
     { question: "Match: Psalm 46:10", answer: "Be still, and know that I am God" },
-  ]
+  ],
+
+puzzle: [
+  {
+    grid: [
+      ["J","E","S","U","S"],
+      ["A","D","A","M","X"],
+      ["N","O","A","H","Y"],
+      ["M","O","S","E","S"],
+      ["D","A","V","I","D"]
+    ],
+    words: ["JESUS", "ADAM", "NOAH", "MOSES", "DAVID"]
+  }
+]  
 };
 
 // ---------- 6️⃣ Show Question ----------
