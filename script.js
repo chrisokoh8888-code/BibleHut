@@ -3,6 +3,10 @@ const SUPABASE_URL = "https://zwntnhosqzoyvpatmenw.supabase.co"; // Replace with
 const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inp3bnRuaG9zcXpveXZwYXRtZW53Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQzMDM2NDMsImV4cCI6MjA4OTg3OTY0M30.mi6pgodcu2hUXCnB5Zbzv0h5NSyiriAZemB4lCQ2IZk"; // Replace with your anon key
 const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
+// Get game type from URL
+const urlParams = new URLSearchParams(window.location.search);
+let gameType = urlParams.get('type') || "fill";
+
 let currentUser = null;
 let score = 0;
 let currentQuestion = 0;
