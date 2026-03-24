@@ -347,6 +347,7 @@ function showQuestion() {
     checkAnswer(answerInput.value, q.answer);
   });
 }
+// ---------- PUZZLE UI ----------
 function showPuzzle() {
   const puzzle = questions.puzzle[0];
 
@@ -378,6 +379,33 @@ function showPuzzle() {
   gameContainer.innerHTML = html;
 
   attachPuzzleEvents(puzzle);
+}
+// 👇👇👇 PLACE IT EXACTLY HERE
+
+// ---------- PUZZLE EVENTS ----------
+function attachPuzzleEvents(puzzle) {
+  const cells = document.querySelectorAll(".puzzle-cell");
+  const selectedDisplay = document.getElementById("selected-word");
+
+  cells.forEach(cell => {
+    cell.addEventListener("click", () => {
+      const letter = cell.dataset.letter;
+
+      selectedLetters += letter;
+      selectedDisplay.textContent = selectedLetters;
+
+      // Check if word is correct
+      if (puzzle.words.includes(selectedLetters)) {
+        cell.style.background = "green";
+        foundWords.push(selectedLetters);
+
+        selectedLetters = "";
+        selectedDisplay.textContent = "";
+
+        alert("✅ Found: " + foundWords.join(", "));
+      }
+    });
+  });
 }
 // ---------- 7️⃣ Check Answer ----------
 function checkAnswer(userAnswer, correctAnswer) {
