@@ -461,3 +461,10 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 });
+const backBtn = document.getElementById("back-home");
+
+if (backBtn) {
+  backBtn.addEventListener("click", () => {
+    window.location.href = "index.html";
+  });
+}
