@@ -347,7 +347,38 @@ function showQuestion() {
     checkAnswer(answerInput.value, q.answer);
   });
 }
+function showPuzzle() {
+  const puzzle = questions.puzzle[0];
 
+  selectedLetters = "";
+  foundWords = [];
+
+  let html = "<h3>🧩 Find the Words</h3>";
+
+  puzzle.grid.forEach((row, rowIndex) => {
+    html += `<div class="puzzle-row">`;
+
+    row.forEach((letter, colIndex) => {
+      html += `
+        <span class="puzzle-cell"
+          data-letter="${letter}"
+          data-row="${rowIndex}"
+          data-col="${colIndex}">
+          ${letter}
+        </span>
+      `;
+    });
+
+    html += "</div>";
+  });
+
+  html += `<p>Words: ${puzzle.words.join(", ")}</p>`;
+  html += `<p>Selected: <span id="selected-word"></span></p>`;
+
+  gameContainer.innerHTML = html;
+
+  attachPuzzleEvents(puzzle);
+}
 // ---------- 7️⃣ Check Answer ----------
 function checkAnswer(userAnswer, correctAnswer) {
   const isCorrect =
