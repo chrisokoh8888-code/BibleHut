@@ -367,6 +367,30 @@ function updateScore() {
   if (scoreElement) scoreElement.textContent = score;
 }
 
+// ---------- FINAL RESULT ----------
+function showFinalResult(totalQuestions) {
+  const wrong = totalQuestions - score;
+  const percent = Math.round((score / totalQuestions) * 100);
+
+  let message = "";
+
+  if (percent >= 80) message = "🔥 Excellent! Bible Scholar!";
+  else if (percent >= 50) message = "👍 Good job!";
+  else message = "📖 Keep learning, you're improving!";
+
+  gameContainer.innerHTML = `
+    <h2>Game Over</h2>
+    <p>Total Questions: ${totalQuestions}</p>
+    <p>Correct: ${score}</p>
+    <p>Wrong: ${wrong}</p>
+    <p>Score: ${percent}%</p>
+    <h3>${message}</h3>
+  `;
+
+  scoreContainer.classList.remove("hidden");
+
+  updateLeaderboard();
+}
 // ---------- 9️⃣ End Game ----------
 function endGame() {
   gameContainer.innerHTML = "<p>Game Over!</p>";
