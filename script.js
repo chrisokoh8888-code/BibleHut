@@ -240,12 +240,15 @@ async function endGame() {
 // ====== Start Game ======
 async function startGame() {
   await loginUser();
+
   score = 0;
   currentQuestion = 0;
-  gameType = gameSelector ? gameSelector.value : "fill";
-  scoreElement.textContent = score;
-  scoreContainer.classList.add('hidden');
-  gameContainer.classList.remove('hidden');
+
+  // Make sure game area is visible
+  if (scoreContainer) scoreContainer.classList.add('hidden');
+  if (gameContainer) gameContainer.classList.remove('hidden');
+
+  // 🔥 THIS LINE IS THE MOST IMPORTANT
   showQuestion();
 }
 
