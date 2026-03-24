@@ -29,7 +29,7 @@
   <script>
     document.getElementById("start-game").addEventListener("click", () => {
       const gameType = document.getElementById("game-selector").value;
-      window.location.href = `game.html?type=${gameType}`;
+      window.location.href = `game.html?type=${gameType}&v=${Date.now()}`;
     });
   </script>
 
