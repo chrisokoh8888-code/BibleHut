@@ -254,4 +254,6 @@ playAgainBtn.addEventListener("click", startGame);
 if(gameSelector) gameSelector.addEventListener("change", startGame);
 
 // ====== Launch ======
-startGame();
+document.addEventListener("DOMContentLoaded", () => {
+  startGame();
+});
