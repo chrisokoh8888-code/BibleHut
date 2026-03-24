@@ -27,9 +27,17 @@
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="script.js"></script>
   <script>
-    document.getElementById('start-game').addEventListener('click', () => {
-      startGame();
-    });
-  </script>
+document.addEventListener("DOMContentLoaded", () => {
+  const startBtn = document.getElementById("start-game");
+  const selector = document.getElementById("game-selector");
+
+  startBtn.addEventListener("click", () => {
+    const selectedGame = selector.value;
+
+    // Pass selected game to next page
+    window.location.href = `game.html?type=${selectedGame}`;
+  });
+});
+</script>
 </body>
 </html>
