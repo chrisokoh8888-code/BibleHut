@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BibleHut Game</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="container">
+    <h1>BibleHut Game</h1>
+
+    <!-- Dynamic Game Title -->
+    <h2 id="game-title"></h2>
+
+    <!-- Game Questions Render Here -->
+    <div id="game-container"></div>
+
+    <!-- Score Display -->
+    <div id="score-container" class="hidden">
+      <h2>🎉 Your Score: <span id="score">0</span></h2>
+      <button id="play-again">Play Again</button>
+    </div>
+
+    <!-- Leaderboard -->
+    <div id="leaderboard-container">
+      <h2>🏆 Leaderboard</h2>
+      <ul id="leaderboard-list"></ul>
+    </div>
+
+  </div>
+
+  <!-- Supabase SDK -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <!-- BibleHut Pro script -->
+  <script src="script.js"></script>
+
+</body>
+</html>
