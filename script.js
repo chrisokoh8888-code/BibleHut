@@ -17,7 +17,6 @@ const gameContainer = document.getElementById('game-container');
 const scoreContainer = document.getElementById('score-container');
 const scoreElement = document.getElementById('score');
 const playAgainBtn = document.getElementById('play-again');
-const gameSelector = document.getElementById('game-selector');
 const leaderboardContainer = document.getElementById('leaderboard-container');
 const leaderboardList = document.getElementById('leaderboard-list');
 
