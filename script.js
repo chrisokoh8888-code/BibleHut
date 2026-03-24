@@ -7,6 +7,23 @@ const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 const urlParams = new URLSearchParams(window.location.search);
 let gameType = urlParams.get('type') || "fill";
 
+// ====== SET GAME TITLE (ADD IT HERE) ======
+document.addEventListener("DOMContentLoaded", () => {
+  const gameTitle = document.getElementById("game-title");
+
+  if (gameTitle) {
+    const titles = {
+      fill: "Fill-in-the-Blank",
+      guess: "Guess the Character",
+      trivia: "Bible Trivia",
+      scramble: "Word Scramble",
+      "verse-match": "Verse Match"
+    };
+
+    gameTitle.textContent = titles[gameType] || "Bible Game";
+  }
+});
+// ====== Global Variables ======
 let currentUser = null;
 let score = 0;
 let currentQuestion = 0;
