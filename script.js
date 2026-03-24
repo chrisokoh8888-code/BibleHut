@@ -335,19 +335,31 @@ function showQuestion() {
 
 // ---------- 7️⃣ Check Answer ----------
 function checkAnswer(userAnswer, correctAnswer) {
-  if (userAnswer.trim().toLowerCase() === correctAnswer.trim().toLowerCase()) {
+  const isCorrect =
+    userAnswer.trim().toLowerCase() === correctAnswer.toLowerCase();
+
+  if (isCorrect) {
     score++;
     updateScore();
   }
 
-  currentQuestion++;
-  const gameQuestions = questions[gameType];
+  // SHOW FEEDBACK
+  gameContainer.innerHTML = `
+    <p>${isCorrect ? "✅ Correct!" : "❌ Wrong!"}</p>
+    <p>Correct Answer: <strong>${correctAnswer}</strong></p>
+  `;
 
-  if (currentQuestion < gameQuestions.length) {
-    showQuestion();
-  } else {
-    endGame();
-  }
+  currentQuestion++;
+
+  setTimeout(() => {
+    const gameQuestions = questions[gameType];
+
+    if (currentQuestion < gameQuestions.length) {
+      showQuestion();
+    } else {
+      showFinalResult(gameQuestions.length);
+    }
+  }, 1500);
 }
 
 // ---------- 8️⃣ Update Score ----------
