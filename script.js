@@ -25,7 +25,9 @@ document.addEventListener("DOMContentLoaded", () => {
 // ---------- 3️⃣ Global Variables ----------
 let score = 0;
 let currentQuestion = 0;
-
+// 👇 ADD THESE EXACTLY HERE
+let selectedLetters = "";
+let foundWords = [];
 // ---------- 4️⃣ DOM Elements ----------
 const gameContainer = document.getElementById("game-container");
 const scoreContainer = document.getElementById("score-container");
