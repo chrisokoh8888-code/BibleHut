@@ -35,6 +35,12 @@ const scoreElement = document.getElementById("score");
 const playAgainBtn = document.getElementById("play-again");
 const leaderboardList = document.getElementById("leaderboard-list");
 
+if (playAgainBtn) {
+  playAgainBtn.addEventListener("click", () => {
+    startGame();
+  });
+}
+
 // ---------- 5️⃣ Sample Questions (Add 50+ per game mode) ----------
 const questions = {
   // -------------------- FILL-IN-THE-BLANK --------------------
