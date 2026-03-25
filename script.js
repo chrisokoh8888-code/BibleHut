@@ -476,6 +476,10 @@ async function getOnlineUsers() {
     .gt("last_seen", new Date(Date.now() - 60000).toISOString()); // last 60 seconds
 
   if (data) {
+    // 👇 ADD IT EXACTLY HERE
+    if (data.length > 10) {
+      console.log("🔥 Game is trending!");
+    }
     const el = document.getElementById("online-users");
     if (el) {
       el.textContent = `🟢 ${data.length} players online`;
