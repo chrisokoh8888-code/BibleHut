@@ -400,15 +400,27 @@ function attachPuzzleEvents(puzzle) {
       selectedLetters += letter;
       selectedDisplay.textContent = selectedLetters;
 
-      // Check if word is correct
-      if (puzzle.words.includes(selectedLetters)) {
-        cell.style.background = "green";
+      // ✅ CHECK WORD MATCH
+      if (puzzle.words.includes(selectedLetters) && !foundWords.includes(selectedLetters)) {
+
         foundWords.push(selectedLetters);
 
+        // ✅ INCREASE SCORE
+        score++;
+        updateScore();
+
+        alert("✅ Found: " + selectedLetters);
+
+        // RESET INPUT
         selectedLetters = "";
         selectedDisplay.textContent = "";
 
-        alert("✅ Found: " + foundWords.join(", "));
+        // ✅ CHECK IF GAME COMPLETED
+        if (foundWords.length === puzzle.words.length) {
+          setTimeout(() => {
+            showFinalResult(puzzle.words.length);
+          }, 500);
+        }
       }
     });
   });
