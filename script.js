@@ -497,11 +497,16 @@ if (playAgainBtn) {
   playAgainBtn.addEventListener("click", () => {
     score = 0;
     currentQuestion = 0;
-    scoreContainer.classList.add("hidden");
-    gameContainer.classList.remove("hidden");
+    if (scoreContainer) scoreContainer.classList.add("hidden");
+  if (gameContainer) gameContainer.classList.remove("hidden");
+
+  // 👇 FIX: handle puzzle separately
+  if (gameType === "puzzle") {
+    showPuzzle();
+  } else {
     showQuestion();
-  });
-}
+  }
+});
 
 // ---------- 1️⃣2️⃣ Start Game on Page Load ----------
 document.addEventListener("DOMContentLoaded", () => {
