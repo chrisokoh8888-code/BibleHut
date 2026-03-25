@@ -455,12 +455,19 @@ function checkAnswer(userAnswer, correctAnswer) {
     }
   }, 1500);
 }
-
 // ---------- 8️⃣ Update Score ----------
 function updateScore() {
   if (scoreElement) scoreElement.textContent = score;
 }
-
+// 👇👇👇 ADD IT RIGHT HERE
+async function updateOnlineStatus() {
+  await supabase
+    .from("online_users")
+    .upsert({
+      user_id: userSessionId,
+      last_seen: new Date().toISOString()
+    });
+}
 // ---------- FINAL RESULT ----------
 function showFinalResult(totalQuestions) {
   const wrong = totalQuestions - score;
