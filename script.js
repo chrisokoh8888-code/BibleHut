@@ -566,6 +566,9 @@ document.addEventListener("DOMContentLoaded", () => {
 // 👇 ADD IT EXACTLY HERE
   updateOnlineStatus(); // run once immediately
   setInterval(updateOnlineStatus, 5000); // then every 5 seconds
+  // 🟢 GET ONLINE USERS COUNT
+  getOnlineUsers();
+  setInterval(getOnlineUsers, 5000);
   // =========================
   // HOME BUTTON
   const backBtn = document.getElementById("back-home");
