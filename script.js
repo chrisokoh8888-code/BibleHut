@@ -549,7 +549,9 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 document.addEventListener("DOMContentLoaded", () => {
   startGame();
-
+// 👇 ADD IT EXACTLY HERE
+  updateOnlineStatus(); // run once immediately
+  setInterval(updateOnlineStatus, 5000); // then every 5 seconds
   // =========================
   // HOME BUTTON
   const backBtn = document.getElementById("back-home");
