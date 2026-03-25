@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BibleHut Easter Challenge</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>🐣 Easter Resurrection Challenge 🐣</h1>
+    <div id="day-number"></div>
+
+    <div id="game-container">
+      <div id="question-container"></div>
+      <input type="text" id="answer-input" placeholder="Type your answer">
+      <button id="submit-btn">Submit</button>
+    </div>
+
+    <div id="result-screen" class="hidden">
+      <h2>🎉 Challenge Completed! 🎉</h2>
+      <img src="assets/badge-day6.png" class="badge" alt="Easter Champion Badge">
+      <p>Your Score: <span id="final-score"></span></p>
+      <p>Your Streak: <span id="final-streak"></span></p>
+      <button onclick="shareBadge()">Share Your Score</button>
+      <button onclick="showLeaderboard()">Leaderboard</button>
+      <button onclick="restartGame()">Play Again</button>
+    </div>
+
+    <button id="leaderboard-btn" onclick="showLeaderboard()">View Leaderboard</button>
+  </div>
+
+  <div id="confetti-container"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
