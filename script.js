@@ -507,6 +507,10 @@ if (playAgainBtn) {
 document.addEventListener("DOMContentLoaded", () => {
   score = 0;
   currentQuestion = 0;
+  if (gameType === "puzzle") {
+  showPuzzle();
+  return;
+}
   scoreContainer.classList.add("hidden");
   gameContainer.classList.remove("hidden");
   showQuestion();
