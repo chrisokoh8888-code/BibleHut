@@ -553,6 +553,11 @@ function startGame() {
   showQuestion();
 }
 
+// 👇👇👇 ADD IT EXACTLY HERE
+function openEaster() {
+  window.open("easter-challenge/index.html", "_blank");
+}
+
 // ---------- 1️⃣2️⃣ Start Game on Page Load ----------
 document.addEventListener("DOMContentLoaded", () => {
   score = 0;
