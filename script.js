@@ -25,6 +25,8 @@ document.addEventListener("DOMContentLoaded", () => {
 // ---------- 3️⃣ Global Variables ----------
 let score = 0;
 let currentQuestion = 0;
+// 👇 online counter
+let userSessionId = Math.random().toString(36).substring(2);
 // 👇 ADD THESE EXACTLY HERE
 let selectedLetters = "";
 let foundWords = [];
