@@ -499,20 +499,20 @@ function updateLeaderboard() {
 }
 
 // ---------- 1️⃣1️⃣ Play Again ----------
-if (playAgainBtn) {
-  playAgainBtn.addEventListener("click", () => {
-    score = 0;
-    currentQuestion = 0;
-    if (scoreContainer) scoreContainer.classList.add("hidden");
+function startGame() {
+  score = 0;
+  currentQuestion = 0;
+
+  if (scoreContainer) scoreContainer.classList.add("hidden");
   if (gameContainer) gameContainer.classList.remove("hidden");
 
-  // 👇 FIX: handle puzzle separately
   if (gameType === "puzzle") {
     showPuzzle();
-  } else {
-    showQuestion();
+    return;
   }
-});
+
+  showQuestion();
+}
 
 // ---------- 1️⃣2️⃣ Start Game on Page Load ----------
 document.addEventListener("DOMContentLoaded", () => {
