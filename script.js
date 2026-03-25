@@ -468,6 +468,20 @@ async function updateOnlineStatus() {
       last_seen: new Date().toISOString()
     });
 }
+// 👇👇👇 ADD IT EXACTLY HERE
+async function getOnlineUsers() {
+  const { data, error } = await supabase
+    .from("online_users")
+    .select("*")
+    .gt("last_seen", new Date(Date.now() - 60000).toISOString()); // last 60 seconds
+
+  if (data) {
+    const el = document.getElementById("online-users");
+    if (el) {
+      el.textContent = `🟢 ${data.length} players online`;
+    }
+  }
+}
 // ---------- FINAL RESULT ----------
 function showFinalResult(totalQuestions) {
   const wrong = totalQuestions - score;
