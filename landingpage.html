@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BibleHut Easter Challenge</title>
+
+<style>
+/* Reset & Body */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #0f172a;
+  color: white;
+  scroll-behavior: smooth;
+}
+
+/* Hero Section */
+.hero {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 5%;
+  background: linear-gradient(135deg, #0f172a, #1e293b);
+  text-align: center;
+}
+
+.hero-text {
+  max-width: 500px;
+  margin-bottom: 30px;
+}
+
+.hero-text h1 {
+  font-size: 2.5rem;
+  line-height: 1.2;
+}
+
+.hero-text .highlight {
+  color: #facc15;
+}
+
+.hero-text p {
+  font-size: 1.1rem;
+  color: #cbd5f5;
+  margin: 20px 0;
+}
+
+.btn {
+  display: inline-block;
+  margin: 10px;
+  padding: 14px 22px;
+  border-radius: 8px;
+  font-weight: bold;
+  text-decoration: none;
+  transition: 0.3s ease;
+}
+
+.btn-primary {
+  background: #facc15;
+  color: black;
+}
+
+.btn-primary:hover {
+  background: #eab308;
+}
+
+.btn-secondary {
+  border: 2px solid #facc15;
+  color: #facc15;
+}
+
+.btn-secondary:hover {
+  background: #facc15;
+  color: black;
+}
+
+/* Pastor Photo + Scorecard */
+.scorecard {
+  background: #1e293b;
+  padding: 20px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 0 25px rgba(250, 204, 21, 0.3);
+  margin: 20px;
+}
+
+.scorecard img {
+  width: 200px;
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(250, 204, 21, 0.5);
+  margin-bottom: 15px;
+}
+
+.scorecard .score {
+  font-size: 2.5rem;
+  color: #facc15;
+  font-weight: bold;
+}
+
+.scorecard .badge {
+  margin-top: 10px;
+  background: #facc15;
+  color: black;
+  padding: 5px 12px;
+  border-radius: 20px;
+  display: inline-block;
+  font-size: 0.85rem;
+}
+
+/* Leaderboard */
+.leaderboard {
+  padding: 50px 5%;
+}
+
+.leaderboard h2 {
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 2rem;
+  color: #facc15;
+}
+
+.leaderboard-table {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  border-collapse: collapse;
+  text-align: center;
+}
+
+.leaderboard-table th,
+.leaderboard-table td {
+  padding: 12px;
+  border-bottom: 1px solid #334155;
+}
+
+/* Features Section */
+.features {
+  padding: 50px 5%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.feature {
+  flex: 1 1 250px;
+  background: #1e293b;
+  padding: 25px;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.feature h3 {
+  margin-bottom: 10px;
+  color: #facc15;
+}
+
+/* Testimonials */
+.testimonials {
+  padding: 50px 5%;
+  text-align: center;
+}
+
+.testimonial {
+  margin: 15px;
+  font-size: 1rem;
+  color: #cbd5f5;
+  background: #1e293b;
+  padding: 15px;
+  border-radius: 12px;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Footer */
+.footer {
+  padding: 25px;
+  text-align: center;
+  font-size: 0.9rem;
+  color: #94a3b8;
+}
+
+/* Responsive */
+@media(max-width: 768px){
+  .hero {
+    flex-direction: column;
+  }
+  .scorecard img {
+    width: 180px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- HERO SECTION -->
+<section class="hero">
+  <div class="hero-text">
+    <h1>
+      A Female Pastor Scored <span class="highlight">43/50</span><br>
+      Can You Beat Her This Easter?
+    </h1>
+    <p>Test your Bible knowledge. Challenge friends. Prove your faith in a fun and exciting way!</p>
+    <a href="#" class="btn btn-primary">Take the Quiz 🔥</a>
+    <a href="#" class="btn btn-secondary" onclick="shareWhatsApp()">Challenge a Friend 😳</a>
+  </div>
+
+  <div class="scorecard">
+    <img src="pastor.jpg" alt="Pastor Photo">
+    <h3>🏆 Pastor Score</h3>
+    <div class="score">43/50</div>
+    <div class="badge">Verified Score</div>
+    <p>Can you beat this?</p>
+  </div>
+</section>
+
+<!-- LEADERBOARD SECTION -->
+<section class="leaderboard">
+  <h2>🏆 Top Players</h2>
+  <table class="leaderboard-table">
+    <tr>
+      <th>Rank</th>
+      <th>Name</th>
+      <th>Score</th>
+    </tr>
+    <tr><td>1</td><td>Grace</td><td>47/50</td></tr>
+    <tr><td>2</td><td>David</td><td>45/50</td></tr>
+    <tr><td>3</td><td>Sarah</td><td>44/50</td></tr>
+    <tr><td>4</td><td>You?</td><td>---</td></tr>
+  </table>
+</section>
+
+<!-- FEATURES SECTION -->
+<section class="features">
+  <div class="feature">
+    <h3>🎮 Daily Quizzes</h3>
+    <p>New Bible questions every day for ultimate knowledge growth.</p>
+  </div>
+  <div class="feature">
+    <h3>🏆 Leaderboards</h3>
+    <p>Compete globally and locally. Climb the ranks with every correct answer!</p>
+  </div>
+  <div class="feature">
+    <h3>📲 Share Scores</h3>
+    <p>Challenge friends instantly via WhatsApp and social media.</p>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials">
+  <h2>What People Are Saying</h2>
+  <div class="testimonial">“I scored 36 and was shocked 😳 This is addictive!”</div>
+  <div class="testimonial">“My whole church is playing now! Love it 🙏”</div>
+  <div class="testimonial">“Fun, spiritual, and competitive all at once!”</div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="hero">
+  <h2>Think You Know the Bible?</h2>
+  <a href="#" class="btn btn-primary">Start Now 🔥</a>
+</section>
+
+<!-- FOOTER -->
+<div class="footer">
+  © 2026 BibleHut. All rights reserved.
+</div>
+
+<script>
+function shareWhatsApp() {
+  let message = "I just took the BibleHut Easter Challenge and scored 43/50 😳 Can you beat me? 👉 https://yourlink.com";
+  let url = "https://wa.me/?text=" + encodeURIComponent(message);
+  window.open(url, '_blank');
+}
+</script>
+
+</body>
+</html>
