@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<meta name="google-adsense-account" content="ca-pub-8110080385457474"/>
+<title>BibleHut Games — #1 Biblical Gaming Platform</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:system-ui,-apple-system,sans-serif;background:#f0f4fa;min-height:100vh}
+button{cursor:pointer;font-family:inherit}
+input{font-family:inherit}
+.hidden{display:none!important}
+
+/* Header */
+#header{background:#0a1628;color:#fff;padding:14px 24px;display:flex;align-items:center;gap:12;position:sticky;top:0;z-index:100}
+#header .logo{font-size:26px}
+#header .title{font-weight:800;font-size:22px;flex:1}
+#header .title span{font-size:13px;background:#1a6fba;padding:2px 8px;border-radius:12px;margin-left:6px}
+#header .score-badge{background:rgba(26,111,186,.2);border:1px solid rgba(26,111,186,.4);color:#7ab8f5;padding:4px 12px;border-radius:20px;font-size:14px;font-weight:600}
+#header .avatar{width:34px;height:34px;border-radius:50%;background:#1a6fba;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:15px;cursor:pointer}
+#header .admin-link{font-size:13px;color:#facc15;cursor:pointer;font-weight:500}
+#header .signout{font-size:13px;color:#aaa;cursor:pointer}
+.header-right{display:flex;align-items:center;gap:12px}
+
+/* Layout */
+.page{max-width:720px;margin:0 auto;padding:24px 16px}
+
+/* Login */
+#login-screen{min-height:100vh;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#0a1628 0%,#1a3a6b 50%,#0d2044 100%)}
+.login-box{background:rgba(255,255,255,.97);border-radius:20px;padding:2.5rem 2rem;width:360px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.4)}
+.login-box .cross{font-size:52px;margin-bottom:8px}
+.login-box h1{font-size:28px;font-weight:700;color:#0a1628;margin-bottom:4px}
+.login-box .sub{color:#666;font-size:14px;margin-bottom:24px}
+.login-box input{width:100%;padding:10px 14px;border-radius:10px;border:1px solid #ddd;font-size:15px;margin-bottom:12px}
+.login-box .btn-login{width:100%;padding:12px;background:#1a6fba;color:#fff;border:none;border-radius:10px;font-size:16px;font-weight:600}
+.login-box .demo-box{margin-top:16px;padding:10px;background:#f0f7ff;border-radius:8px;font-size:12px;color:#555;text-align:left}
+.login-box .error{background:#fee;color:#c00;border-radius:8px;padding:8px 12px;font-size:13px;margin-bottom:16px}
+
+/* Welcome card */
+.welcome-card{background:linear-gradient(135deg,#0a1628,#1a3a6b);border-radius:20px;padding:28px 24px;color:#fff;margin-bottom:24px}
+.welcome-card .greeting{font-size:14px;color:#7ab8f5;margin-bottom:4px}
+.welcome-card .name{font-size:24px;font-weight:700;margin-bottom:12px}
+.welcome-stats{display:flex;gap:16px}
+.stat-box{background:rgba(255,255,255,.1);border-radius:10px;padding:10px 16px;text-align:center}
+.stat-box .val{font-size:20px;font-weight:700}
+.stat-box .lbl{font-size:11px;color:#7ab8f5}
+.badge-box{background:rgba(255,255,255,.1);border-radius:10px;padding:10px 16px;flex:1}
+.badge-box .lbl{font-size:11px;color:#7ab8f5;margin-bottom:6px}
+
+/* Leaderboard */
+.lb-card{background:#fff;border-radius:14px;padding:16px 20px;margin-bottom:20px;box-shadow:0 2px 8px rgba(0,0,0,.05)}
+.lb-card .lb-title{display:flex;justify-content:space-between;margin-bottom:12px;font-weight:600}
+.lb-strip{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px}
+.lb-item{background:#f0f7ff;border-radius:10px;padding:10px 14px;min-width:110px;text-align:center;flex-shrink:0}
+.lb-item .lb-icon{font-size:20px}
+.lb-item .lb-name{font-size:12px;font-weight:600;color:#0a1628;margin-top:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lb-item .lb-score{font-size:14px;font-weight:700;color:#1a6fba}
+
+/* Game grid */
+.section-title{font-weight:600;font-size:18px;margin-bottom:16px;color:#0a1628}
+.game-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.game-card{background:#fff;border:1px solid #e0e8f4;border-radius:16px;padding:20px 16px;text-align:left;transition:transform .15s,box-shadow .15s;box-shadow:0 2px 6px rgba(0,0,0,.05)}
+.game-card:hover{transform:translateY(-2px);box-shadow:0 6px 16px rgba(0,0,0,.1)}
+.game-card .gc-icon{font-size:36px;margin-bottom:8px}
+.game-card .gc-title{font-weight:600;font-size:16px;color:#0a1628;margin-bottom:4px}
+.game-card .gc-desc{font-size:12px;color:#888;line-height:1.4}
+
+/* Verse of day */
+.vod{background:linear-gradient(135deg,#f5f0ff,#ede8ff);border:1px solid #c4a8f0;border-radius:16px;padding:20px;margin-top:20px}
+.vod .vod-label{font-size:13px;color:#7c3aed;font-weight:600;margin-bottom:8px}
+.vod .vod-text{font-size:16px;font-style:italic;color:#2d1b69;line-height:1.6;margin-bottom:8px}
+.vod .vod-ref{font-size:12px;color:#9c6fe4}
+
+/* Game screen */
+.game-screen{background:#fff;border-radius:20px;padding:28px;box-shadow:0 4px 20px rgba(0,0,0,.08)}
+.game-header{display:flex;align-items:center;gap:12px;margin-bottom:20px}
+.btn-back{background:transparent;border:1px solid #ddd;border-radius:8px;padding:6px 12px;font-size:14px;color:#666}
+.game-title{font-weight:700;font-size:18px;color:#0a1628}
+.game-meta{display:flex;justify-content:space-between;margin-bottom:16px;font-size:14px;color:#888}
+.game-score{font-weight:700;color:#1a6fba}
+
+/* Progress bar */
+.progress-wrap{background:#eee;border-radius:8px;height:8px;overflow:hidden;margin-bottom:12px}
+.progress-bar{height:100%;background:#1a6fba;transition:width .4s}
+
+/* Question box */
+.q-box{background:#f0f7ff;border-radius:14px;padding:24px;margin:20px 0;text-align:center}
+.q-text{font-size:20px;font-weight:600;color:#0a1628;line-height:1.4}
+.q-ref{font-size:12px;color:#888;margin-top:8px}
+.q-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.opt-btn{padding:14px;border-radius:12px;background:#fff;border:1px solid #ddd;color:#0a1628;font-size:15px;font-weight:500;transition:all .2s}
+.opt-btn.correct{background:#e6f4ea;border:2px solid #2d7a2d;color:#2d7a2d}
+.opt-btn.wrong{background:#fee;border:2px solid #c00;color:#c00}
+
+/* Fill in blank */
+.fill-sentence{font-size:19px;font-style:italic;color:#0a1628;line-height:1.8;text-align:center}
+.fill-blank{background:#dbeafe;border:2px dashed #1a6fba;padding:2px 16px;border-radius:6px;color:#1a6fba;min-width:80px;display:inline-block}
+.input-row{display:flex;gap:12px;margin-top:16px}
+.input-row input{flex:1;padding:12px 16px;border-radius:10px;border:1px solid #ddd;font-size:16px}
+.btn-check{padding:12px 24px;background:#1a6fba;color:#fff;border:none;border-radius:10px;font-size:15px;font-weight:600}
+.answer-reveal{color:#c00;margin-top:8px;font-size:14px}
+
+/* Streak */
+.streak{text-align:center;margin:8px 0;color:#e65100;font-weight:600;font-size:14px}
+
+/* True/False */
+.tf-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.tf-btn{padding:20px;border-radius:14px;font-size:22px;font-weight:700;border:2px solid transparent}
+.tf-btn.true-btn{background:#e6f4ea;color:#2d7a2d;border-color:#2d7a2d}
+.tf-btn.false-btn{background:#fff0f0;color:#dc3545;border-color:#dc3545}
+
+/* Result screen */
+.result-screen{text-align:center;padding:24px 0}
+.result-icon{font-size:64px;margin-bottom:8px}
+.result-title{font-size:26px;font-weight:700;color:#0a1628;margin-bottom:8px}
+.result-sub{font-size:18px;color:#888;margin-bottom:20px}
+.result-score-box{background:#f0f7ff;border-radius:16px;padding:24px 32px;display:inline-block;margin-bottom:24px}
+.result-pts{font-size:48px;font-weight:800;color:#1a6fba}
+.result-of{color:#888;font-size:14px}
+.btn-home{padding:14px 36px;background:#1a6fba;color:#fff;border:none;border-radius:12px;font-size:16px;font-weight:600}
+
+/* Score popup */
+#score-popup{position:fixed;top:80px;right:24px;background:#1a6fba;color:#fff;padding:10px 20px;border-radius:12px;font-weight:500;font-size:18px;z-index:999;display:none}
+
+/* Badges */
+.badge{font-size:11px;font-weight:500;padding:2px 8px;border-radius:20px;border:1px solid}
+.badge-blue{background:#1a6fba22;color:#1a6fba;border-color:#1a6fba44}
+.badge-purple{background:#5a3dbf22;color:#5a3dbf;border-color:#5a3dbf44}
+.badge-green{background:#2d7a2d22;color:#2d7a2d;border-color:#2d7a2d44}
+
+/* Character clue */
+.clue-item{display:flex;gap:8px;margin-bottom:8px;color:#333}
+.clue-num{color:#1a6fba;font-weight:700}
+
+/* Scramble */
+.scramble-word{letter-spacing:12px;font-size:36px;font-weight:700;color:#1a6fba;margin-bottom:12px;display:block;text-align:center}
+
+/* Puzzle */
+.puzzle-box{background:#f5f0ff;border:1px solid #c4a8f0;border-radius:14px;padding:28px;margin:16px 0;text-align:center}
+.puzzle-q{font-size:19px;font-weight:600;color:#2d1b69;line-height:1.5}
+.btn-solve{background:#5a3dbf;color:#fff}
+
+/* Easter */
+.easter-header{text-align:center;margin-bottom:16px}
+.easter-q-box{background:linear-gradient(135deg,#fff8f0,#fff0e0);border:1px solid #fcd9a0;border-radius:14px;padding:24px;margin:16px 0;text-align:center}
+
+/* Admin */
+#admin-screen{min-height:100vh;background:#f0f4fa}
+.admin-header{background:#0a1628;color:#fff;padding:16px 24px;display:flex;align-items:center;gap:16px}
+.admin-title{font-weight:700;font-size:20px;flex:1}
+.btn-admin-back{background:#dc3545;color:#fff;padding:6px 14px;border-radius:20px;font-size:13px;border:none}
+.admin-tabs{display:flex;background:#fff;border-bottom:1px solid #ddd;padding:0 24px}
+.admin-tab{padding:14px 20px;border:none;background:transparent;font-weight:500;font-size:14px;cursor:pointer;border-bottom:3px solid transparent;color:#555}
+.admin-tab.active{border-bottom-color:#1a6fba;color:#1a6fba}
+.admin-body{padding:24px}
+.stat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:24px}
+.admin-stat{background:#fff;border-radius:14px;padding:20px 16px;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.admin-stat .icon{font-size:28px;margin-bottom:8px}
+.admin-stat .val{font-size:26px;font-weight:700}
+.admin-stat .lbl{font-size:13px;color:#888}
+.admin-two-col{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.admin-card{background:#fff;border-radius:14px;padding:20px;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.admin-card h3{margin:0 0 16px;font-weight:600}
+.lb-row{display:flex;align-items:center;gap:12px;padding:8px 0;border-bottom:1px solid #f0f0f0}
+.lb-row:last-child{border-bottom:none}
+.pop-bar-wrap{margin-bottom:12px}
+.pop-bar-row{display:flex;justify-content:space-between;font-size:13px;margin-bottom:4px}
+.pop-bar-bg{background:#eee;border-radius:8px;height:8px;overflow:hidden}
+.pop-bar-fill{height:100%;transition:width .4s}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th{text-align:left;padding:8px 12px;color:#888;font-weight:500;border-bottom:2px solid #eee}
+td{padding:10px 12px;border-bottom:1px solid #f5f5f5}
+.toggle{width:44px;height:24px;background:#1a6fba;border-radius:12px;cursor:pointer;position:relative;display:inline-block}
+.toggle-thumb{width:18px;height:18px;background:#fff;border-radius:9px;position:absolute;right:3px;top:3px}
+.settings-row{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid #f0f0f0}
+
+@media(max-width:500px){
+  .game-grid{grid-template-columns:1fr}
+  .stat-grid{grid-template-columns:repeat(2,1fr)}
+  .admin-two-col{grid-template-columns:1fr}
+  .q-grid,.tf-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- Score popup -->
+<div id="score-popup"></div>
+
+<!-- LOGIN SCREEN -->
+<div id="login-screen">
+  <div class="login-box">
+    <div class="cross">✝️</div>
+    <h1>BibleHut</h1>
+    <p class="sub">The #1 Biblical Gaming Platform</p>
+    <div class="error hidden" id="login-error"></div>
+    <input id="login-user" placeholder="Username" type="text"/>
+    <input id="login-pass" placeholder="Password" type="password"/>
+    <button class="btn-login" onclick="doLogin()">Sign In</button>
+    <div class="demo-box">
+      <strong>Demo accounts:</strong><br>
+      User: <code>player1</code> / Pass: <code>bible123</code><br>
+      Admin: <code>admin</code> / Pass: <code>admin123</code>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN APP -->
+<div id="app-screen" class="hidden">
+  <div id="header">
+    <span class="logo">✝️</span>
+    <span class="title">BibleHut <span>#1 Bible Games</span></span>
+    <div class="header-right">
+      <span class="score-badge" id="hdr-score">⭐ 0</span>
+      <div class="avatar" id="hdr-avatar" onclick="tryAdmin()">U</div>
+      <span class="admin-link hidden" id="admin-link" onclick="showAdmin()">Admin ⚙️</span>
+      <span class="signout" onclick="signOut()">Sign out</span>
+    </div>
+  </div>
+  <div class="page">
+    <!-- HOME -->
+    <div id="home-view">
+      <div class="welcome-card">
+        <div class="greeting">Welcome back,</div>
+        <div class="name" id="wc-name">Player 👋</div>
+        <div class="welcome-stats">
+          <div class="stat-box"><div class="val" id="wc-score">0</div><div class="lbl">Total Score</div></div>
+          <div class="stat-box"><div class="val" id="wc-games">0</div><div class="lbl">Games Played</div></div>
+          <div class="badge-box"><div class="lbl">Badges</div><div id="wc-badges"></div></div>
+        </div>
+      </div>
+
+      <div class="lb-card">
+        <div class="lb-title"><span>🏆 Leaderboard</span><span style="font-size:13px;color:#888;font-weight:400">Top Players</span></div>
+        <div class="lb-strip" id="lb-strip"></div>
+      </div>
+
+      <div class="section-title">Choose a Game</div>
+      <div class="game-grid" id="game-grid"></div>
+
+      <div class="vod">
+        <div class="vod-label">📖 Verse of the Day</div>
+        <p class="vod-text">"For God so loved the world that he gave his one and only Son, that whoever believes in him shall not perish but have eternal life."</p>
+        <p class="vod-ref">— John 3:16</p>
+      </div>
+    </div>
+
+    <!-- GAME VIEW -->
+    <div id="game-view" class="hidden">
+      <div class="game-screen">
+        <div class="game-header">
+          <button class="btn-back" onclick="backHome()">← Back</button>
+          <span class="game-title" id="gv-title">Game</span>
+        </div>
+        <div id="game-content"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ADMIN SCREEN -->
+<div id="admin-screen" class="hidden">
+  <div class="admin-header">
+    <span style="font-size:24px">✝️</span>
+    <span class="admin-title">BibleHut Admin</span>
+    <button class="btn-admin-back" onclick="hideAdmin()">← Back to Game</button>
+  </div>
+  <div class="admin-tabs">
+    <button class="admin-tab active" onclick="adminTab('overview',this)">Overview</button>
+    <button class="admin-tab" onclick="adminTab('players',this)">Players</button>
+    <button class="admin-tab" onclick="adminTab('games',this)">Games</button>
+    <button class="admin-tab" onclick="adminTab('settings',this)">Settings</button>
+  </div>
+  <div class="admin-body" id="admin-body"></div>
+</div>
+
+<script>
+// ── Data ──
+const USERS = {
+  admin:{pass:"admin123",role:"admin",name:"Admin User",score:0,badges:[],gamesPlayed:0},
+  player1:{pass:"bible123",role:"user",name:"Grace Okafor",score:450,badges:["First Win","Scholar"],gamesPlayed:12},
+};
+
+const GAMES_LIST = [
+  {id:"trivia",   icon:"❓",label:"Bible Trivia",      desc:"Test your knowledge with challenging questions"},
+  {id:"fill",     icon:"✍️",label:"Fill in the Blank", desc:"Complete missing words from scripture"},
+  {id:"character",icon:"👤",label:"Guess the Character",desc:"Who is this Bible figure?"},
+  {id:"scramble", icon:"🔀",label:"Word Scramble",     desc:"Unscramble key Bible words"},
+  {id:"trueFalse",icon:"⚖️",label:"True or False",    desc:"Fact-check your Bible knowledge"},
+  {id:"verseMatch",icon:"📖",label:"Verse Match",      desc:"Match verses to their books"},
+  {id:"easter",   icon:"🐣",label:"Easter Challenge",  desc:"Special resurrection edition"},
+  {id:"puzzle",   icon:"🧩",label:"Bible Puzzle",      desc:"Piece together scripture clues"},
+];
+
+const LEADERBOARD = [
+  {name:"Grace Okafor",score:1240,icon:"🏆"},
+  {name:"Chidi Eze",score:980,icon:"🥈"},
+  {name:"Amina Yusuf",score:870,icon:"🥉"},
+  {name:"Emmanuel Adeyemi",score:720,icon:"⭐"},
+  {name:"Ngozi Bello",score:650,icon:"⭐"},
+];
+
+const TRIVIA = [
+  {q:"How many books are in the Old Testament?",o:["39","40","27","66"],a:0,ref:"General"},
+  {q:"Who built the ark?",o:["Moses","Abraham","Noah","David"],a:2,ref:"Genesis 6"},
+  {q:"In which city was Jesus born?",o:["Jerusalem","Nazareth","Bethlehem","Jericho"],a:2,ref:"Luke 2:4"},
+  {q:"How many disciples did Jesus have?",o:["10","11","12","13"],a:2,ref:"Luke 6:13"},
+  {q:"Who was swallowed by a big fish?",o:["Elijah","Daniel","Jonah","Ezekiel"],a:2,ref:"Jonah 1:17"},
+  {q:"What is the shortest verse in the Bible?",o:["God is love","Jesus wept","Pray always","Fear not"],a:1,ref:"John 11:35"},
+  {q:"Who wrote most of the Psalms?",o:["Solomon","Moses","David","Asaph"],a:2,ref:"Various"},
+  {q:"What was the first miracle of Jesus?",o:["Healing a blind man","Feeding 5000","Turning water to wine","Walking on water"],a:2,ref:"John 2:1-11"},
+  {q:"How many days did it rain during the flood?",o:["20","40","60","100"],a:1,ref:"Genesis 7:17"},
+  {q:"Who denied Jesus three times?",o:["Thomas","Judas","Peter","Andrew"],a:2,ref:"Luke 22:61"},
+];
+
+const FILL = [
+  {s:"For God so loved the world that He gave His only ___ Son.",b:"begotten",ref:"John 3:16"},
+  {s:"The Lord is my ___, I shall not want.",b:"shepherd",ref:"Psalm 23:1"},
+  {s:"I can do all things through ___ who strengthens me.",b:"Christ",ref:"Philippians 4:13"},
+  {s:"In the beginning, God created the ___ and the earth.",b:"heavens",ref:"Genesis 1:1"},
+  {s:"Be still and know that I am ___.",b:"God",ref:"Psalm 46:10"},
+];
+
+const CHARS = [
+  {clues:["Thrown into a lion's den","Prayed three times a day","Served under Nebuchadnezzar"],name:"Daniel",ref:"Daniel 6"},
+  {clues:["Had extraordinary strength","Hair was the source of his power","Killed a lion with bare hands"],name:"Samson",ref:"Judges 13-16"},
+  {clues:["Was sold by his brothers","Interpreted Pharaoh's dream","Had a coat of many colors"],name:"Joseph",ref:"Genesis 37"},
+  {clues:["Climbed a sycamore tree to see Jesus","Was a tax collector","Gave half his possessions to the poor"],name:"Zacchaeus",ref:"Luke 19"},
+];
+
+const SCRAMBLES = [
+  {word:"GOSPEL",hint:"Good news of salvation",ref:"Mark 1:1"},
+  {word:"BAPTISM",hint:"Ritual of water and faith",ref:"Matthew 3:11"},
+  {word:"COVENANT",hint:"A sacred agreement with God",ref:"Genesis 9:13"},
+  {word:"PROPHET",hint:"One who speaks God's word",ref:"Jeremiah 1:5"},
+  {word:"MIRACLE",hint:"A divine wonder",ref:"John 2:11"},
+];
+
+const TF = [
+  {q:"Moses parted the Red Sea.",a:true,ref:"Exodus 14:21"},
+  {q:"Paul wrote the book of Revelation.",a:false,ref:"Revelation 1:1 — it was John"},
+  {q:"David killed Goliath with a sling and stone.",a:true,ref:"1 Samuel 17:50"},
+  {q:"Jesus was born in Jerusalem.",a:false,ref:"Luke 2:4 — He was born in Bethlehem"},
+  {q:"Elijah was taken to heaven in a chariot of fire.",a:true,ref:"2 Kings 2:11"},
+];
+
+const VERSES = [
+  {v:"The Lord is my shepherd; I shall not want.",book:"Psalms"},
+  {v:"In the beginning was the Word.",book:"John"},
+  {v:"Love your enemies and pray for those who persecute you.",book:"Matthew"},
+  {v:"I am the resurrection and the life.",book:"John"},
+  {v:"For the wages of sin is death, but the gift of God is eternal life.",book:"Romans"},
+];
+const ALL_BOOKS = ["Genesis","Psalms","John","Matthew","Romans","Revelation","Proverbs"];
+
+const EASTER_Q = [
+  {q:"On which day did Jesus rise from the dead?",o:["First day","Third day","Seventh day","Fortieth day"],a:1,ref:"Luke 24:7"},
+  {q:"Who first discovered the empty tomb?",o:["Peter","John","Mary Magdalene","The disciples"],a:2,ref:"John 20:1"},
+  {q:"What did the angel say at the tomb?",o:["He is sleeping","He is risen","He will return","Fear not only"],a:1,ref:"Matthew 28:6"},
+  {q:"Who betrayed Jesus for 30 pieces of silver?",o:["Peter","Thomas","Judas Iscariot","Barabbas"],a:2,ref:"Matthew 26:15"},
+  {q:"Who was released instead of Jesus?",o:["Herod","Barabbas","Pilate","Simon"],a:1,ref:"Luke 23:25"},
+];
+
+const PUZZLES = [
+  {q:"I have 150 chapters, I am the longest book in the Bible. What am I?",a:"Psalms",hint:"King David wrote many of my chapters",ref:"Psalms"},
+  {q:"I was created on day 4 of creation. I give light to the earth at night. What am I?",a:"Moon",hint:"Genesis 1:16 mentions two great lights",ref:"Genesis 1:16"},
+  {q:"I am a river that flowed through the Garden of Eden. What am I?",a:"Pishon",hint:"Genesis 2:11",ref:"Genesis 2:11"},
+];
+
+// ── State ──
+let currentUser = null, currentUserObj = null, totalScore = 0;
+let activeGame = null, gameState = {};
+
+// ── Login ──
+function doLogin(){
+  const u = document.getElementById('login-user').value.trim().toLowerCase();
+  const p = document.getElementById('login-pass').value;
+  const usr = USERS[u];
+  const err = document.getElementById('login-error');
+  if(usr && usr.pass === p){
+    currentUser = u; currentUserObj = {...usr};
+    totalScore = currentUserObj.score || 0;
+    err.classList.add('hidden');
+    document.getElementById('login-screen').classList.add('hidden');
+    document.getElementById('app-screen').classList.remove('hidden');
+    initHome();
+  } else {
+    err.textContent = 'Invalid username or password.';
+    err.classList.remove('hidden');
+  }
+}
+document.getElementById('login-pass').addEventListener('keydown', e => { if(e.key==='Enter') doLogin(); });
+
+function signOut(){
+  currentUser = null; currentUserObj = null;
+  document.getElementById('app-screen').classList.add('hidden');
+  document.getElementById('login-screen').classList.remove('hidden');
+  document.getElementById('login-user').value='';
+  document.getElementById('login-pass').value='';
+}
+
+// ── Home ──
+function initHome(){
+  // Header
+  document.getElementById('hdr-score').textContent = '⭐ ' + totalScore;
+  document.getElementById('hdr-avatar').textContent = (currentUserObj.name||'U')[0];
+  if(currentUserObj.role==='admin') document.getElementById('admin-link').classList.remove('hidden');
+  // Welcome card
+  document.getElementById('wc-name').textContent = currentUserObj.name + ' 👋';
+  document.getElementById('wc-score').textContent = totalScore;
+  document.getElementById('wc-games').textContent = currentUserObj.gamesPlayed || 0;
+  const badges = currentUserObj.badges || [];
+  document.getElementById('wc-badges').innerHTML = badges.length
+    ? badges.map(b=>`<span class="badge badge-blue" style="margin:2px">${b}</span>`).join('')
+    : '<span style="font-size:12px;color:#7ab8f5">Play to earn badges!</span>';
+  // Leaderboard
+  document.getElementById('lb-strip').innerHTML = LEADERBOARD.map(l=>`
+    <div class="lb-item">
+      <div class="lb-icon">${l.icon}</div>
+      <div class="lb-name">${l.name.split(' ')[0]}</div>
+      <div class="lb-score">${l.score}</div>
+    </div>`).join('');
+  // Games
+  document.getElementById('game-grid').innerHTML = GAMES_LIST.map(g=>`
+    <button class="game-card" onclick="startGame('${g.id}')">
+      <div class="gc-icon">${g.icon}</div>
+      <div class="gc-title">${g.label}</div>
+      <div class="gc-desc">${g.desc}</div>
+    </button>`).join('');
+}
+
+function updateScore(pts){
+  totalScore += pts;
+  document.getElementById('hdr-score').textContent = '⭐ ' + totalScore;
+  document.getElementById('wc-score').textContent = totalScore;
+  showPopup(pts);
+}
+
+function showPopup(pts){
+  const p = document.getElementById('score-popup');
+  p.textContent = '+' + pts + ' pts!';
+  p.style.display = 'block';
+  setTimeout(()=>{ p.style.display='none'; }, 1200);
+}
+
+// ── Game routing ──
+function startGame(id){
+  activeGame = id;
+  const g = GAMES_LIST.find(x=>x.id===id);
+  document.getElementById('home-view').classList.add('hidden');
+  document.getElementById('game-view').classList.remove('hidden');
+  document.getElementById('gv-title').textContent = g.icon + ' ' + g.label;
+  gameState = {qi:0, score:0, streak:0, revealed:0, showHint:false};
+  renderGame();
+}
+
+function backHome(){
+  document.getElementById('game-view').classList.add('hidden');
+  document.getElementById('home-view').classList.remove('hidden');
+  activeGame = null;
+}
+
+function renderGame(){
+  const c = document.getElementById('game-content');
+  if(activeGame==='trivia') renderTrivia(c);
+  else if(activeGame==='fill') renderFill(c);
+  else if(activeGame==='character') renderCharacter(c);
+  else if(activeGame==='scramble') renderScramble(c);
+  else if(activeGame==='trueFalse') renderTF(c);
+  else if(activeGame==='verseMatch') renderVerseMatch(c);
+  else if(activeGame==='easter') renderEaster(c);
+  else if(activeGame==='puzzle') renderPuzzle(c);
+}
+
+// ── Trivia ──
+function renderTrivia(c){
+  if(gameState.qi >= TRIVIA.length){ renderResult(c,'Bible Trivia',TRIVIA.length*10); return; }
+  const q = TRIVIA[gameState.qi];
+  c.innerHTML = `
+    <div class="game-meta"><span>Question ${gameState.qi+1}/${TRIVIA.length}</span><span class="game-score">⭐ ${gameState.score}</span></div>
+    <div class="progress-wrap"><div class="progress-bar" style="width:${((gameState.qi+1)/TRIVIA.length)*100}%"></div></div>
+    ${gameState.streak>1?`<div class="streak">🔥 ${gameState.streak} streak!</div>`:''}
+    <div class="q-box"><p class="q-text">${q.q}</p><p class="q-ref">📖 ${q.ref}</p></div>
+    <div class="q-grid">${q.o.map((opt,i)=>`<button class="opt-btn" id="opt-${i}" onclick="pickTrivia(${i})">${opt}</button>`).join('')}</div>`;
+}
+function pickTrivia(i){
+  const q = TRIVIA[gameState.qi];
+  document.querySelectorAll('.opt-btn').forEach(b=>b.onclick=null);
+  document.getElementById('opt-'+q.a).classList.add('correct');
+  if(i!==q.a){ document.getElementById('opt-'+i).classList.add('wrong'); gameState.streak=0; }
+  else { const pts=10+gameState.streak*2; gameState.score+=pts; gameState.streak++; updateScore(pts); }
+  setTimeout(()=>{ gameState.qi++; renderGame(); }, 900);
+}
+
+// ── Fill ──
+function renderFill(c){
+  if(gameState.qi >= FILL.length){ renderResult(c,'Fill in the Blank',FILL.length*15); return; }
+  const q = FILL[gameState.qi];
+  const parts = q.s.split('___');
+  c.innerHTML = `
+    <div class="game-meta"><span>${gameState.qi+1}/${FILL.length}</span><span class="game-score">⭐ ${gameState.score}</span></div>
+    <div class="progress-wrap"><div class="progress-bar" style="width:${((gameState.qi+1)/FILL.length)*100}%"></div></div>
+    <div class="q-box">
+      <p class="fill-sentence">"${parts[0]}<span class="fill-blank" id="fill-blank">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>${parts[1]}"</p>
+      <p class="q-ref">📖 ${q.ref}</p>
+    </div>
+    <div class="input-row">
+      <input id="fill-input" placeholder="Type the missing word..." onkeydown="if(event.key==='Enter')checkFill()"/>
+      <button class="btn-check" onclick="checkFill()">Check</button>
+    </div>
+    <div class="answer-reveal hidden" id="fill-reveal"></div>`;
+  document.getElementById('fill-input').focus();
+}
+function checkFill(){
+  const q = FILL[gameState.qi];
+  const val = document.getElementById('fill-input').value.trim();
+  const correct = val.toLowerCase()===q.b.toLowerCase();
+  document.getElementById('fill-blank').textContent = correct ? q.b : '✗';
+  document.getElementById('fill-blank').style.color = correct ? '#2d7a2d' : '#c00';
+  if(!correct){ const r=document.getElementById('fill-reveal'); r.textContent='Answer: '+q.b; r.classList.remove('hidden'); }
+  else { gameState.score+=15; updateScore(15); }
+  document.getElementById('fill-input').disabled=true;
+  setTimeout(()=>{ gameState.qi++; renderGame(); }, 900);
+}
+
+// ── Character ──
+function renderCharacter(c){
+  if(gameState.qi >= CHARS.length){ renderResult(c,'Guess the Character',CHARS.length*15); return; }
+  const q = CHARS[gameState.qi];
+  const rev = gameState.revealed;
+  c.innerHTML = `
+    <div class="game-meta"><span>${gameState.qi+1}/${CHARS.length}</span><span class="game-score">⭐ ${gameState.score}</span></div>
+    <div class="q-box" style="text-align:left">
+      <p style="font-weight:600;margin-bottom:12px;color:#0a1628">👤 Who am I?</p>
+      ${q.clues.slice(0,rev+1).map((cl,i)=>`<div class="clue-item"><span class="clue-num">#${i+1}</span> ${cl}</div>`).join('')}
+      ${rev<q.clues.length-1?`<button onclick="revealClue()" style="font-size:13px;color:#888;background:transparent;border:1px dashed #ddd;border-radius:8px;padding:6px 12px;margin-top:8px">+ Reveal clue (−4 pts)</button>`:''}
+      <p class="q-ref">📖 ${q.ref}</p>
+    </div>
+    <div class="input-row">
+      <input id="char-input" placeholder="Name this character..." onkeydown="if(event.key==='Enter')checkChar()"/>
+      <button class="btn-check" onclick="checkChar()">Guess</button>
+    </div>
+    <div class="answer-reveal hidden" id="char-reveal"></div>`;
+  document.getElementById('char-input').focus();
+}
+function revealClue(){ gameState.revealed++; renderGame(); }
+function checkChar(){
+  const q = CHARS[gameState.qi];
+  const val = document.getElementById('char-input').value.trim();
+  const correct = val.toLowerCase()===q.name.toLowerCase();
+  if(!correct){ document.getElementById('char-reveal').textContent='Answer: '+q.name; document.getElementById('char-reveal').classList.remove('hidden'); }
+  else { const pts=Math.max(15-gameState.revealed*4,5); gameState.score+=pts; updateScore(pts); }
+  document.getElementById('char-input').disabled=true;
+  setTimeout(()=>{ gameState.qi++; gameState.revealed=0; renderGame(); }, 900);
+}
+
+// ── Scramble ──
+function renderScramble(c){
+  if(gameState.qi >= SCRAMBLES.length){ renderResult(c,'Word Scramble',SCRAMBLES.length*12); return; }
+  const q = SCRAMBLES[gameState.qi];
+  const scr = q.word.split('').sort(()=>Math.random()-0.5).join('');
+  c.innerHTML = `
+    <div class="game-meta"><span>${gameState.qi+1}/${SCRAMBLES.length}</span><span class="game-score">⭐ ${gameState.score}</span></div>
+    <div class="q-box">
+      <span class="scramble-word">${scr}</span>
+      <p style="font-size:14px;color:#666">💡 ${q.hint}</p>
+      <p class="q-ref">📖 ${q.ref}</p>
+    </div>
+    <div class="input-row">
+      <input id="scr-input" placeholder="Unscramble the word..." style="text-transform:uppercase;letter-spacing:4px" onkeydown="if(event.key==='Enter')checkScramble()"/>
+      <button class="btn-check" onclick="checkScramble()">Check</button>
+    </div>
+    <div class="answer-reveal hidden" id="scr-reveal"></div>`;
+  document.getElementById('scr-input').oninput=function(){ this.value=this.value.toUpperCase(); };
+  document.getElementById('scr-input').focus();
+}
+function checkScramble(){
+  const q = SCRAMBLES[gameState.qi];
+  const val = document.getElementById('scr-input').value.trim().toUpperCase();
+  const correct = val===q.word;
+  if(!correct){ document.getElementById('scr-reveal').textContent='Answer: '+q.word; document.getElementById('scr-reveal').classList.remove('hidden'); }
+  else { gameState.score+=12; updateScore(12); }
+  document.getElementById('scr-input').disabled=true;
+  setTimeout(()=>{ gameState.qi++; renderGame(); }, 900);
+}
+
+// ── True/False ──
+function renderTF(c){
+  if(gameState.qi >= TF.length){ renderResult(c,'True or False',TF.length*10); return; }
+  const q = TF[gameState.qi];
+  c.innerHTML = `
+    <div class="game-meta"><span>${gameState.qi+1}/${TF.length}</span><span class="game-score">⭐ ${gameState.score}</span></div>
+    <div class="progress-wrap"><div class="progress-bar" style="width:${((gameState.qi+1)/TF.length)*100}%"></div></div>
+    <div class="q-box"><p class="q-text">${q.q}</p><p class="q-ref">📖 ${q.ref}</p></div>
+    <div class="tf-grid">
+      <button class="tf-btn true-btn" onclick="pickTF(true)">✅ TRUE</button>
+      <button class="tf-btn false-btn" onclick="pickTF(false)">❌ FALSE</button>
+    </div>`;
+}
+function pickTF(v){
+  const q = TF[gameState.qi];
+  document.querySelectorAll('.tf-btn').forEach(b=>b.onclick=null);
+  if(v===q.a){ gameState.score+=10; updateScore(10); }
+  setTimeout(()=>{ gameState.qi++; renderGame(); }, 700);
+}
+
+// ── Verse Match ──
+function renderVerseMatch(c){
+  if(gameState.qi >= VERSES.length){ renderResult(c,'Verse Match',VERSES.length*12); return; }
+  const q = VERSES[gameState.qi];
+  let opts = ALL_BOOKS.filter(b=>b!==q.book).sort(()=>Math.random()-0.5).slice(0,3);
+  opts = [...opts,q.book].sort(()=>Math.random()-0.5);
+  c.innerHTML = `
+    <div class="game-meta"><span>${gameState.qi+1}/${VERSES.length}</span><span class="game-score">⭐ ${gameState.score}</span></div>
+    <div class="q-box"><p class="q-text" style="font-style:italic">"${q.v}"</p><p class="q-ref">Which book is this from?</p></div>
+    <div class="q-grid">${opts.map(b=>`<button class="opt-btn" id="vm-${b}" onclick="pickVerse('${b}','${q.book}')">${b}</button>`).join('')}</div>`;
+}
+function pickVerse(sel,correct){
+  document.querySelectorAll('.opt-btn').forEach(b=>b.onclick=null);
+  document.getElementById('vm-'+correct).classList.add('correct');
+  if(sel!==correct) document.getElementById('vm-'+sel).classList.add('wrong');
+  else { gameState.score+=12; updateScore(12); }
+  setTimeout(()=>{ gameState.qi++; renderGame(); }, 900);
+}
+
+// ── Easter ──
+function renderEaster(c){
+  if(gameState.qi >= EASTER_Q.length){ renderResult(c,'Easter Challenge',EASTER_Q.length*15,true); return; }
+  const q = EASTER_Q[gameState.qi];
+  c.innerHTML = `
+    <div class="easter-header"><span style="font-size:32px">🐣</span><span style="display:block;color:#e65100;font-weight:700;font-size:16px">Easter Challenge</span></div>
+    <div class="game-meta"><span>${gameState.qi+1}/${EASTER_Q.length}</span><span class="game-score">⭐ ${gameState.score}</span></div>
+    <div class="progress-wrap"><div class="progress-bar" style="width:${((gameState.qi+1)/EASTER_Q.length)*100}%;background:#e65100"></div></div>
+    <div class="easter-q-box"><p class="q-text">${q.q}</p><p class="q-ref">📖 ${q.ref}</p></div>
+    <div class="q-grid">${q.o.map((opt,i)=>`<button class="opt-btn" id="eq-${i}" onclick="pickEaster(${i})">${opt}</button>`).join('')}</div>`;
+}
+function pickEaster(i){
+  const q = EASTER_Q[gameState.qi];
+  document.querySelectorAll('.opt-btn').forEach(b=>b.onclick=null);
+  document.getElementById('eq-'+q.a).classList.add('correct');
+  if(i!==q.a) document.getElementById('eq-'+i).classList.add('wrong');
+  else { gameState.score+=15; updateScore(15); }
+  setTimeout(()=>{ gameState.qi++; renderGame(); }, 900);
+}
+
+// ── Puzzle ──
+function renderPuzzle(c){
+  if(gameState.qi >= PUZZLES.length){ renderResult(c,'Bible Puzzle',PUZZLES.length*20); return; }
+  const q = PUZZLES[gameState.qi];
+  c.innerHTML = `
+    <div class="game-meta"><span>Puzzle ${gameState.qi+1}/${PUZZLES.length}</span><span class="game-score">⭐ ${gameState.score}</span></div>
+    <div class="puzzle-box">
+      <p class="puzzle-q">${q.q}</p>
+      ${gameState.showHint?`<p style="font-size:14px;color:#7c3aed;margin-top:12px;font-style:italic">💡 ${q.hint}</p>`:''}
+      <p class="q-ref">📖 ${q.ref}</p>
+    </div>
+    ${!gameState.showHint?`<button onclick="gameState.showHint=true;renderGame()" style="font-size:13px;color:#888;background:transparent;border:1px dashed #ccc;border-radius:8px;padding:6px 12px;margin-bottom:12px">Show hint</button>`:''}
+    <div class="input-row">
+      <input id="pz-input" placeholder="Your answer..." onkeydown="if(event.key==='Enter')checkPuzzle()"/>
+      <button class="btn-check btn-solve" onclick="checkPuzzle()">Solve</button>
+    </div>
+    <div class="answer-reveal hidden" id="pz-reveal"></div>`;
+  document.getElementById('pz-input').focus();
+}
+function checkPuzzle(){
+  const q = PUZZLES[gameState.qi];
+  const val = document.getElementById('pz-input').value.trim();
+  const correct = val.toLowerCase()===q.a.toLowerCase();
+  if(!correct){ document.getElementById('pz-reveal').textContent='Answer: '+q.a; document.getElementById('pz-reveal').classList.remove('hidden'); }
+  else { gameState.score+=20; updateScore(20); }
+  document.getElementById('pz-input').disabled=true;
+  setTimeout(()=>{ gameState.qi++; gameState.showHint=false; renderGame(); }, 900);
+}
+
+// ── Result ──
+function renderResult(c, label, max, special){
+  const pct = Math.round((gameState.score/max)*100);
+  const msg = pct===100?"Perfect! 🏆":pct>=80?"Excellent! 🌟":pct>=60?"Good job! 👏":pct>=40?"Keep studying! 📖":"Try again! 💪";
+  const icon = pct===100?"🏆":pct>=80?"🌟":pct>=60?"👏":"📖";
+  const barColor = pct>=80?"#2d7a2d":pct>=60?"#1a6fba":"#dc3545";
+  c.innerHTML = `
+    <div class="result-screen">
+      ${special?'<div style="font-size:48px;margin-bottom:8px">🐣</div>':''}
+      <div class="result-icon">${icon}</div>
+      <div class="result-title">${msg}</div>
+      <div class="result-sub">${label} Complete</div>
+      <div class="result-score-box">
+        <div class="result-pts">${gameState.score}</div>
+        <div class="result-of">out of ${max} points (${pct}%)</div>
+      </div>
+      <div class="progress-wrap" style="margin-bottom:24px"><div class="progress-bar" style="width:${pct}%;background:${barColor}"></div></div>
+      <button class="btn-home" onclick="backHome()">← Back to Games</button>
+    </div>`;
+}
+
+// ── Admin ──
+function tryAdmin(){ if(currentUserObj&&currentUserObj.role==='admin') showAdmin(); }
+function showAdmin(){
+  document.getElementById('app-screen').classList.add('hidden');
+  document.getElementById('admin-screen').classList.remove('hidden');
+  adminTab('overview', document.querySelector('.admin-tab'));
+}
+function hideAdmin(){
+  document.getElementById('admin-screen').classList.add('hidden');
+  document.getElementById('app-screen').classList.remove('hidden');
+}
+
+const GAME_PCTS = [78,65,90,55,82,44,70,60];
+const PBAR_COLORS = ["#1a6fba","#2d7a2d","#8a5c00","#5a3dbf","#dc3545","#00897b","#e65100","#6a1b9a"];
+
+function adminTab(tab, el){
+  document.querySelectorAll('.admin-tab').forEach(b=>b.classList.remove('active'));
+  el.classList.add('active');
+  const body = document.getElementById('admin-body');
+  if(tab==='overview'){
+    body.innerHTML = `
+      <div class="stat-grid">
+        ${[['👥','1,248','Total Players','#1a6fba'],['🎮','342','Games Today','#2d7a2d'],['⭐','687','Avg Score','#8a5c00'],['🟢','37','Active Now','#5a3dbf']]
+          .map(([icon,val,lbl,col])=>`<div class="admin-stat"><div class="icon">${icon}</div><div class="val" style="color:${col}">${val}</div><div class="lbl">${lbl}</div></div>`).join('')}
+      </div>
+      <div class="admin-two-col">
+        <div class="admin-card">
+          <h3>Top Leaderboard</h3>
+          ${LEADERBOARD.map(l=>`<div class="lb-row"><span style="font-size:18px">${l.icon}</span><span style="flex:1;font-weight:500">${l.name}</span><span style="font-weight:700;color:#1a6fba">${l.score}</span></div>`).join('')}
+        </div>
+        <div class="admin-card">
+          <h3>Game Popularity</h3>
+          ${GAMES_LIST.map((g,i)=>`<div class="pop-bar-wrap"><div class="pop-bar-row"><span>${g.icon} ${g.label}</span><span style="color:#888">${GAME_PCTS[i]}%</span></div><div class="pop-bar-bg"><div class="pop-bar-fill" style="width:${GAME_PCTS[i]}%;background:${PBAR_COLORS[i]}"></div></div></div>`).join('')}
+        </div>
+      </div>`;
+  } else if(tab==='players'){
+    body.innerHTML = `<div class="admin-card"><h3>Registered Players</h3>
+      <table><thead><tr><th>Name</th><th>Username</th><th>Role</th><th>Score</th><th>Badges</th><th>Status</th></tr></thead><tbody>
+      ${Object.entries(USERS).map(([k,v])=>`<tr>
+        <td style="font-weight:500">${v.name}</td><td style="color:#888">${k}</td>
+        <td><span class="badge ${v.role==='admin'?'badge-purple':'badge-blue'}">${v.role}</span></td>
+        <td style="font-weight:600;color:#1a6fba">${v.score}</td>
+        <td>${(v.badges||[]).join(', ')||'—'}</td>
+        <td style="color:#2d7a2d;font-weight:500">● Active</td></tr>`).join('')}
+      </tbody></table></div>`;
+  } else if(tab==='games'){
+    body.innerHTML = `<div style="display:grid;grid-template-columns:repeat(2,1fr);gap:16px">
+      ${GAMES_LIST.map(g=>`<div class="admin-card"><div style="display:flex;align-items:center;gap:12px;margin-bottom:12px"><span style="font-size:32px">${g.icon}</span><div><div style="font-weight:600;font-size:16px">${g.label}</div><div style="font-size:13px;color:#888">${g.desc}</div></div></div><div style="display:flex;gap:8px"><span class="badge badge-green">Active</span><span class="badge" style="background:#8a5c0022;color:#8a5c00;border-color:#8a5c0044">Featured</span></div></div>`).join('')}
+    </div>`;
+  } else if(tab==='settings'){
+    body.innerHTML = `<div class="admin-card" style="max-width:500px">
+      <h3 style="margin-bottom:20px">Platform Settings</h3>
+      ${['Daily Challenge Mode','Leaderboard Visibility','Score Multiplier Events','Push Notifications']
+        .map(s=>`<div class="settings-row"><span style="font-weight:500">${s}</span><div class="toggle"><div class="toggle-thumb"></div></div></div>`).join('')}
+    </div>`;
+  }
+}
+</script>
+</body>
+</html>
